@@ -25,5 +25,13 @@ public abstract class SQLite {
                                                  "motive varchar" +
                                                         ")";
 
-
+    /**
+     * This is a SQL string for add a player to the ban's list.
+     */
+    public static String ADD_PLAYER_BANDATA = "INSERT INTO " +
+                                                 "bans(" +
+                                               "'player'," +
+                                               "'motive'" +
+                                                   ")" +
+                                              "VALUES (?,?)";
 }

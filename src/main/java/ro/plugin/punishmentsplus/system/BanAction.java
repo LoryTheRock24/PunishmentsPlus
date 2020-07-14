@@ -13,6 +13,7 @@ package ro.plugin.punishmentsplus.system;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import ro.plugin.punishmentsplus.data.DataHandler;
 
 /**
  * This is the class for execute a ban / kick to a player. In this class, the ban is only permanent.
@@ -26,6 +27,7 @@ public class BanAction {
     public static void ban(String player, String motive) {
         Player plr = Bukkit.getPlayerExact(player);
 
+        DataHandler.addPlayer(player, motive); // Add a player to the ban's list into the data.sqlite.
     }
 
     /**

@@ -13,9 +13,6 @@ package ro.plugin.punishmentsplus.data;
 
 import ro.plugin.punishmentsplus.PunishmentsPlus;
 
-import java.io.File;
-import java.io.IOException;
-
 public class LoadDataSystem {
 
     private static final LoadDataSystem LoadDataSystem = new LoadDataSystem();
@@ -25,21 +22,9 @@ public class LoadDataSystem {
      */
     public static void load() {
 
-        LoadDataSystem.loadDatabasesFolder();
         LoadDataSystem.loadDataFolder();
 
-        new CreateDatabases();
-    }
-
-    /**
-     * Method for create the databases' folder. Into this folder, will be inserted some sqlite databases;
-     * For example, the bandata.sqlite and the mutedata.sqlite
-     */
-    public void loadDatabasesFolder() {
-        File file = new File(PunishmentsPlus.Instance.getDataFolder() + "/databases");
-        if (!file.exists()) {
-            file.mkdirs();
-        }
+        new CreateDatabase();
     }
 
     /**
