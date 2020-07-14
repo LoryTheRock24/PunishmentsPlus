@@ -26,7 +26,7 @@ import java.sql.Statement;
  */
 public class BanData {
 
-    public Connection connection;
+    public Connection connection; // Database connection.
 
     public static final File file = new File(PunishmentsPlus.Instance.getDataFolder() + "/databases/bandata.db");
 
@@ -36,6 +36,8 @@ public class BanData {
         try {
             file.createNewFile();
 
+            createBanTable();
+
             Bukkit.getLogger().info("[PunishmentsPlus] bandata.sqlite file successfully created!");
 
         } catch (IOException e) {
@@ -43,6 +45,9 @@ public class BanData {
         }
     }
 
+    /**
+     * Method for get the database SQLITE connection.
+     */
     public Connection getDatabaseConnection() {
         if (connection != null) return connection;
 
@@ -55,6 +60,10 @@ public class BanData {
         return null;
     }
 
+    /**
+     * Method for create a table into the database. The SQL string is into the SQLite class. The SQLite class
+     * is used for save all the SQL command used for do something into a database.
+     */
     public void createBanTable() {
         try {
             Statement st = getDatabaseConnection().createStatement();
