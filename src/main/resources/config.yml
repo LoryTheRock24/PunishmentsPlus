@@ -9,4 +9,4 @@ Settings:
     # This is the message that will be displayed on the loading screen of a player that has
     # been permanently banned from the server
     #
-    joinBanPermanently: ""
+    joinBanPermanently: "&c&lYOU ARE PERMANENTLY BANNED FROM THIS SERVER!\n &cBanned by:&f %BAN-EXECUTOR% \n &cMotivation:&f %MOTIVATION%"

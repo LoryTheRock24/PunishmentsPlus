@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import ro.plugin.punishmentsplus.system.BanAction;
+import ro.plugin.punishmentsplus.system.ConfigValues;
 
 @SuppressWarnings("ALL")
 public class PluginListener implements Listener {
@@ -24,8 +25,9 @@ public class PluginListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player plr = e.getPlayer();
 
-        if (!BanAction.isPermanentlyBanned(plr.getName()) || !BanAction.isTemporarilyBanned(plr.getName())) return;
-
-
+        if (BanAction.isPermanentlyBanned(plr.getName())) {
+            plr.kickPlayer(ConfigValues.JOIN_PERMANENTLY_BANNED_MESSAGE(BanAction.getBanExecutor(plr.getName()),
+                    BanAction.getBanMotivation(plr.getName())));
+        }
     }
 }

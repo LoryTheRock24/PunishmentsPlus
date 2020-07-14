@@ -21,7 +21,7 @@ import java.sql.*;
  */
 public class DataHandler {
 
-    private static Connection connection;
+    public static Connection connection;
 
     /**
      * Method for get the connection from the data.sqlite database.
@@ -60,13 +60,14 @@ public class DataHandler {
         }
     }
 
-    public static void addPlayer(String playerName, String banMotive) {
+    public static void addPlayer(String playerName, String banMotive, String banExecutor) {
         try {
             openConnection();
             PreparedStatement pst = connection.prepareStatement(SQLite.ADD_PLAYER_BANDATA);
 
             pst.setString(1, playerName);
             pst.setString(2, banMotive);
+            pst.setString(3, banExecutor);
             pst.executeUpdate();
 
             closeConnection();

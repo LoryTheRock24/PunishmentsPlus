@@ -22,7 +22,8 @@ public abstract class SQLite {
     public static String CREATE_BAN_TABLE = "CREATE TABLE IF NOT EXISTS " +
                                                       "bans(" +
                                                  "player varchar, " +
-                                                 "motive varchar" +
+                                                 "motive varchar," +
+                                                "executor varchar" +
                                                         ")";
 
     /**
@@ -31,7 +32,30 @@ public abstract class SQLite {
     public static String ADD_PLAYER_BANDATA = "INSERT INTO " +
                                                  "bans(" +
                                                "'player'," +
-                                               "'motive'" +
+                                               "'motive'," +
+                                              "'executor'" +
                                                    ")" +
-                                              "VALUES (?,?)";
+                                              "VALUES (?,?,?)";
+
+    /**
+     * This is a SQL string for select the banned players' list.
+     */
+    public static String SELECT_BAN_PLAYER_LIST = "SELECT player " +
+                                                  "FROM bans";
+
+    /**
+     * This is a SQL method for get the executor of a ban. This method need the
+     * banned player for get his ban executor.
+     */
+    public static String SELECT_BAN_EXECUTOR(String player) {
+        return "SELECT executor FROM bans WHERE player='" + player + "';";
+    }
+
+    /**
+     * This is a SQL method for get the motive of a ban. This method need the
+     * banned player for get his ban executor.
+     */
+    public static String SELECT_BAN_MOTIVE(String player) {
+        return "SELECT motive FROM bans WHERE player='" + player + "';";
+    }
 }

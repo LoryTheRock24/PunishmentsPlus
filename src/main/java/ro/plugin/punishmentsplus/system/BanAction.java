@@ -14,6 +14,12 @@ package ro.plugin.punishmentsplus.system;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import ro.plugin.punishmentsplus.data.DataHandler;
+import ro.plugin.punishmentsplus.data.SQLite;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the class for execute a ban / kick to a player. In this class, the ban is only permanent.
@@ -24,10 +30,10 @@ public class BanAction {
      * Method for ban a player; The first string's the player name and the another is the ban's motive. If
      * the sender doesn't want to send the ban's reason, the parameter "motive" is not important.
      */
-    public static void ban(String player, String motive) {
+    public static void ban(String player, String motive, String banExecutor) {
         Player plr = Bukkit.getPlayerExact(player);
 
-        DataHandler.addPlayer(player, motive); // Add a player to the ban's list into the data.sqlite.
+        DataHandler.addPlayer(player, motive, banExecutor); // Add a player to the ban's list into the data.sqlite.
     }
 
     /**
@@ -51,6 +57,28 @@ public class BanAction {
      * Boolean method for check if a player is permanently banned.
      */
     public static boolean isPermanentlyBanned(String player) {
+        List<String> data = new ArrayList<>();
+
+        try {
+            DataHandler.openConnection();
+
+            Statement st = DataHandler.connection.createStatement();
+            ResultSet rs;
+
+            rs = st.executeQuery(SQLite.SELECT_BAN_PLAYER_LIST);
+
+            for (int i=1; rs.next(); i++) data.add(rs.getString(i));
+
+            st.close();
+
+            DataHandler.closeConnection();
+
+            if (data.contains(player)) return true;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
@@ -59,5 +87,58 @@ public class BanAction {
      */
     public static boolean isTemporarilyBanned(String player) {
         return false;
+    }
+
+    /**
+     * Method for get the executor of a ban.
+     */
+    public static String getBanExecutor(String bannedPlayer) {
+        String banExecutor = "";
+
+        try {
+            DataHandler.openConnection();
+
+            Statement st = DataHandler.connection.createStatement();
+            ResultSet rs;
+
+            rs = st.executeQuery(SQLite.SELECT_BAN_EXECUTOR(bannedPlayer));
+            banExecutor = rs.getString("executor");
+            st.close();
+
+            DataHandler.closeConnection();
+
+            return banExecutor;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return banExecutor;
+    }
+
+    /**
+     * Method for get the motive of a ban.
+     */
+    public static String getBanMotivation(String bannedPlayer) {
+        String banMotive = "";
+
+        try {
+            DataHandler.openConnection();
+
+            Statement st = DataHandler.connection.createStatement();
+            ResultSet rs;
+
+            rs = st.executeQuery(SQLite.SELECT_BAN_MOTIVE(bannedPlayer));
+            banMotive = rs.getString("motive");
+            st.close();
+
+            DataHandler.closeConnection();
+
+            return banMotive;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return banMotive;
     }
 }
