@@ -27,7 +27,7 @@ public class LoadDataSystem {
         LoadDataSystem.loadDatabasesFolder();
         LoadDataSystem.loadDataFolder();
 
-        new BanData();
+        new CreateDatabases();
     }
 
     /**
