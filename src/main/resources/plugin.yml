@@ -1,0 +1,5 @@
+name: PunishmentsPlus
+version: ${project.version}
+main: ro.plugin.punishmentsplus.PunishmentsPlus
+authors: [LoryTheRock24]
+description: Very good plugin for applicate a ban / warn / kick to a player.

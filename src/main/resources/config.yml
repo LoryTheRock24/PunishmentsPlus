@@ -1,0 +1,12 @@
+#
+# Punishments Plus 1.0-RELEASE
+#
+# By LoryTheRock24
+#
+Settings:
+  Messages:
+    #
+    # This is the message that will be displayed on the loading screen of a player that has
+    # been permanently banned from the server
+    #
+    joinBanPermanently: ""
