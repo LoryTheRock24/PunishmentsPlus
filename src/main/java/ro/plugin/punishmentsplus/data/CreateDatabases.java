@@ -23,8 +23,8 @@ import java.io.IOException;
  */
 public class CreateDatabases {
 
-    public static final File BanData = new File(PunishmentsPlus.Instance.getDataFolder() + "/databases/bandata.db");
-    public static final File MuteData = new File(PunishmentsPlus.Instance.getDataFolder() + "/databases/mutedata.db");
+    public static final File BanData = new File(PunishmentsPlus.Instance.getDataFolder() + "/databases/bandata.sqlite");
+    public static final File MuteData = new File(PunishmentsPlus.Instance.getDataFolder() + "/databases/mutedata.sqlite");
 
     public CreateDatabases() {
         if (!BanData.exists()) {

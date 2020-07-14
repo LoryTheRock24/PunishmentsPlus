@@ -14,6 +14,7 @@ package ro.plugin.punishmentsplus.data;
 import ro.plugin.punishmentsplus.PunishmentsPlus;
 
 import java.io.File;
+import java.io.IOException;
 
 public class LoadDataSystem {
 
@@ -35,8 +36,10 @@ public class LoadDataSystem {
      * For example, the bandata.sqlite and the mutedata.sqlite
      */
     public void loadDatabasesFolder() {
-        File file = new File(PunishmentsPlus.Instance.getDataFolder() + File.separator + "databases");
-        file.mkdir();
+        File file = new File(PunishmentsPlus.Instance.getDataFolder() + "/databases");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
     }
 
     /**

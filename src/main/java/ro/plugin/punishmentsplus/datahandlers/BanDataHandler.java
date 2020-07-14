@@ -19,7 +19,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Objects;
 
 /**
  * Class for manage the bandata.db database.
@@ -33,15 +32,20 @@ public class BanDataHandler {
     /**
      * Method for get the connection from the bandata.db database.
      */
-    public static Connection getDatabaseConnection() {
-        if (BanDataHandler.connection != null) return BanDataHandler.connection;
-
+    public static void openConnection() {
         try {
             BanDataHandler.connection = DriverManager.getConnection("jdbc:sqlite:" + CreateDatabases.BanData.getAbsolutePath());
         } catch (SQLException e) {
-            e.printStackTrace();
+            Bukkit.getLogger().warning("[PunishmentsPlus] Could not open the bandata.sqlite connection.");
         }
-        return null;
+    }
+
+    public static void closeConnection() {
+        try {
+            BanDataHandler.connection.close();
+        } catch (SQLException e) {
+            Bukkit.getLogger().warning("[PunishmentsPlus] Could not close the bandata.sqlite connection.");
+        }
     }
 
     /**
@@ -49,8 +53,10 @@ public class BanDataHandler {
      */
     public static void createTable() {
         try {
-            Statement st = Objects.requireNonNull(getDatabaseConnection()).createStatement();
+            openConnection();
+            Statement st = BanDataHandler.connection.createStatement();
             st.execute(SQLite.CREATE_BAN_TABLE);
+            closeConnection();
         } catch (SQLException e) {
             Bukkit.getLogger().warning("[PunishmentsPlus] Creation of the bandata.db database's data-table failed.");
         }
