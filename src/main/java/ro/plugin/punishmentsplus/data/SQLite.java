@@ -58,4 +58,11 @@ public abstract class SQLite {
     public static String SELECT_BAN_MOTIVE(String player) {
         return "SELECT motive FROM bans WHERE player='" + player + "';";
     }
+
+    /**
+     * This is a SQL method for remove a player from the bans' data.
+     */
+    public static String REMOVE_BANNED_PLAYER(String player) {
+        return "DELETE FROM bans WHERE player=" + player +";";
+    }
 }

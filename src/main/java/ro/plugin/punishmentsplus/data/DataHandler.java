@@ -72,8 +72,20 @@ public class DataHandler {
 
             closeConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            Bukkit.getLogger().warning("[PunishmentsPlus] Error while adding the player " + playerName + " to the plugin's database.");
         }
+    }
 
+    public static void removePlayer(String playerName) {
+        try {
+            openConnection();
+            PreparedStatement pst = connection.prepareStatement(SQLite.REMOVE_BANNED_PLAYER(playerName));
+
+            pst.executeUpdate();
+
+            closeConnection();
+        } catch (SQLException e) {
+            Bukkit.getLogger().warning("[PunishmentsPlus] Error while removing the player " + playerName + " from the plugin's database.");
+        }
     }
 }

@@ -34,14 +34,26 @@ public class BanAction {
         Player plr = Bukkit.getPlayerExact(player);
 
         DataHandler.addPlayer(player, motive, banExecutor); // Add a player to the ban's list into the data.sqlite.
+
+        if (ConfigValues.isPublicBanMessageEnabled) {
+            Bukkit.getServer().broadcastMessage(ConfigValues.PUBLIC_BAN_MESSAGE(player, motive, banExecutor, "PERMANENT"));
+        }
+
+        if (!plr.isOnline()) return;
+
+        plr.kickPlayer(ConfigValues.JOIN_PERMANENTLY_BANNED_MESSAGE(banExecutor, motive));
     }
 
     /**
      * Method for un_ban a player into the server. The method doesn't check if a player is banned. For check it, you
      * need to use a system using the method "isBanned()".
      */
-    public static void un_ban(String player) {
+    public static void un_ban(String player, String unbanExecutor) {
+        DataHandler.removePlayer(player); // Remove a player to the database's bans table.
 
+        if (ConfigValues.isPublicUnbanMessageEnabled) {
+            Bukkit.getServer().broadcastMessage(ConfigValues.PUBLIC_UNBAN_MESSAGE(player, unbanExecutor));
+        }
     }
 
     /**

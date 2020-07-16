@@ -4,9 +4,50 @@
 # By LoryTheRock24
 #
 Settings:
+  #
+  # This option define if the server can say to all the players a message for when a player will banned
+  # from the server.
+  #
+  enablePublicBanMessage: true
+    #
+    # This option define if the server can say to all the players a message for when a player will unbanned
+    # from the server.
+    #
+    enablePublicUnbanMessage: true
+  #
+  # The messages.
+  #
   Messages:
     #
     # This is the message that will be displayed on the loading screen of a player that has
     # been permanently banned from the server
     #
     joinBanPermanently: "&c&lYOU ARE PERMANENTLY BANNED FROM THIS SERVER!\n &cBanned by:&f %BAN-EXECUTOR% \n &cMotivation:&f %MOTIVATION%"
+    #
+    # The public ban message.
+    #
+    publicBanMessage: "&f%BANNED-PLAYER%&c was banned from the server by&f %BAN-EXECUTOR%&f for&f %MOTIVATION%.\n&c Duration:&f %DURATION%."
+    #
+    # The public unban message.
+    #
+    publicUnbanMessage: "&a%BANNED-PLAYER% was unbanned from the server by %UNBAN-EXECUTOR%."
+    #
+    # The message for when a player execute a command, but he hasn't got the permission.
+    #
+    noPermission: "&c[PunishmentsPlus]&f You don't have the necessary permission to do that."
+    #
+    # The message for when a player execute a command, but the command's syntax is incorrect.
+    #
+    syntaxError: "&c[PunishmentsPlus]&f Command syntax incorrect! use /pphelp for the plugin commands' list."
+    #
+    # The message for when a player try to ban an already banned player.
+    #
+    alreadyBanned: "&c[PunishmentsPlus]&f That player was already banned."
+    #
+    # The message for when a player ban another player for permanently
+    #
+    banSuccessful: "&c[PunishmentsPlus]&f You have permanently banned %BANNED-PLAYER% for %MOTIVATION%"
+    #
+    # The message for when a player try to ban a player with the ban.override permission
+    #
+    banImpossible: "&c[PunishmentsPlus]&f You can't ban that player."
