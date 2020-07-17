@@ -23,7 +23,7 @@ public class NormalUnbanCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1) {
             if (sender.hasPermission("ban.execute")) {
-                if (BanAction.isPermanentlyBanned(args[0]) && BanAction.isTemporarilyBanned(args[0])) {
+                if (BanAction.isPermanentlyBanned(args[0]) || BanAction.isTemporarilyBanned(args[0])) {
 
                     sender.sendMessage(ConfigValues.PLAYER_UNBANNED(args[0]));
                     BanAction.un_ban(args[0], getExecutor(sender));

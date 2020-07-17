@@ -15,6 +15,11 @@ Settings:
   #
   enablePublicUnbanMessage: true
   #
+  # This option define if the server can say to all the players a message for when a player will kicked
+  # from the server.
+  #
+  enablePublicKickMessage: true
+  #
   # The ban override players
   #
   overridePlayers:
@@ -32,11 +37,19 @@ Settings:
     #
     # The public ban message.
     #
-    publicBanMessage: "&f%BANNED-PLAYER%&c was banned from the server by&f %BAN-EXECUTOR%&f for&f %MOTIVATION%.\n&cDuration:&f %DURATION%."
+    publicBanMessage: "&c[PunishmentsPlus]&f %BANNED-PLAYER%&c was banned from the server by&f %BAN-EXECUTOR%&c for&f %MOTIVATION%.\n&cDuration:&f %DURATION%."
+    #
+    # This is the message that will be displayed on the screen of a player when he was kicked from the server.
+    #
+    kickMessage: "&c&lYOU ARE KICKED FROM THIS SERVER!\n &cKicked by:&f %KICK-EXECUTOR% \n &cMotivation:&f %MOTIVATION%"
+    #
+    # The public kick message.
+    #
+    publicKickMessage: "&c[PunishmentsPlus]&f %KICKED-PLAYER%&c was kicked from the server by&f %KICK-EXECUTOR%&c for&f %MOTIVATION%."
     #
     # The public unban message.
     #
-    publicUnbanMessage: "&a%BANNED-PLAYER% was unbanned from the server by %UNBAN-EXECUTOR%."
+    publicUnbanMessage: "&a[PunishmentsPlus] %BANNED-PLAYER% was unbanned from the server by %UNBAN-EXECUTOR%."
     #
     # The message for when a player execute a command, but he hasn't got the permission.
     #
@@ -54,7 +67,7 @@ Settings:
     #
     banSuccessful: "&c[PunishmentsPlus]&f You have permanently banned %BANNED-PLAYER% for %MOTIVATION%"
     #
-    # The message for when a player try to ban a player with the ban.override permission
+    # The message for when a player try to ban a player into the overrides players' list
     #
     banImpossible: "&c[PunishmentsPlus]&f You can't ban that player."
     #
@@ -65,3 +78,11 @@ Settings:
     # The message for when a player unban a player.
     #
     playerUnbanned: "&c[PunishmentsPlus]&f You have unbanned %BANNED-PLAYER%"
+    #
+    # The message for when a player try to kick a player into the overrides players' list
+    #
+    kickImpossible: "&c[PunishmentsPlus]&f You can't kick that player."
+    #
+    # The message for when a player ban another player for permanently
+    #
+    kickSuccessful: "&c[PunishmentsPlus]&f You have kicked %KICKED-PLAYER% for %MOTIVATION%"

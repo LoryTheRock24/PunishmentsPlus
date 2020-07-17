@@ -11,7 +11,6 @@
 
 package ro.plugin.punishmentsplus.data;
 
-import com.google.common.io.BaseEncoding;
 import org.bukkit.Bukkit;
 
 import java.sql.*;

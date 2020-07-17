@@ -20,9 +20,6 @@ public abstract class ConfigValues {
 
     private static final FileConfiguration config = PunishmentsPlus.Instance.getConfig();
 
-    private static final String enablePublicBanMessage = config.getString("Settings.enablePublicBanMessage");
-    private static final String enablePublicUnbanMessage = config.getString("Settings.enablePublicUnbanMessage");
-
     public static final String NO_PERMISSION = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.noPermission"));
     public static final String SYNTAX_ERROR = PrincipalMessaging.parseMessage(
@@ -33,8 +30,26 @@ public abstract class ConfigValues {
             config.getString("Settings.Messages.banImpossible"));
     public static final String NOT_BANNED = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.notBanned"));
+    public static final String KICK_IMPOSSIBLE = PrincipalMessaging.parseMessage(
+            config.getString("Settings.Messages.kickImpossible"));
 
     public static final List<String> overridePlayers = config.getStringList("Settings.overridePlayers");
+
+    public static String PUBLIC_KICK_MESSAGE(String kickedPlayer, String kickExecutor, String motive) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.publicKickMessage")
+                .replace("%KICKED-PLAYER%", kickedPlayer).replace("%KICK-EXECUTOR%", kickExecutor)
+                .replace("%MOTIVATION%", motive));
+    }
+
+    public static String KICK_MESSAGE(String kickExecutor, String motive) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.publicKickMessage")
+                .replace("%KICK-EXECUTOR%", kickExecutor).replace("%MOTIVATION%", motive));
+    }
+
+    public static String KICK_SUCCESSFUL(String player, String motive) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.kickSuccessful")
+                .replace("%KICKED-PLAYER%", player).replace("%MOTIVATION%", motive));
+    }
 
     public static String PLAYER_UNBANNED(String player) {
         return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.playerUnbanned")
@@ -62,6 +77,10 @@ public abstract class ConfigValues {
                 .replace("%BANNED-PLAYER%", bannedPlayer).replace("%UNBAN-EXECUTOR%", unbanExecutor));
     }
 
-    public static boolean isPublicBanMessageEnabled = Boolean.parseBoolean(enablePublicBanMessage);
-    public static boolean isPublicUnbanMessageEnabled = Boolean.parseBoolean(enablePublicUnbanMessage);
+    public static boolean IS_PUBLIC_BAN_MESSAGE_ENABLED = Boolean.parseBoolean(
+            config.getString("Settings.enablePublicBanMessage"));
+    public static boolean IS_PUBLIC_UNBAN_MESSAGE_ENABLED = Boolean.parseBoolean(
+            config.getString("Settings.enablePublicUnbanMessage"));
+    public static boolean IS_PUBLIC_KICK_MESSAGE_ENABLED = Boolean.parseBoolean(
+            config.getString("Settings.enablePublicKickMessage"));
 }

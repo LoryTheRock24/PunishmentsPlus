@@ -19,23 +19,18 @@ import ro.plugin.punishmentsplus.system.BanAction;
 import ro.plugin.punishmentsplus.system.ConfigValues;
 
 @SuppressWarnings("ALL")
-public class NormalBanCommand implements CommandExecutor{
+public class NormalKickCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length >= 2) {
-
-            if (sender.hasPermission("ban.execute")) {
-                if (!BanAction.isPermanentlyBanned(args[0]) && !BanAction.isTemporarilyBanned(args[0])) {
-                    if (ConfigValues.overridePlayers.contains(args[0])) {
-                        sender.sendMessage(ConfigValues.BAN_IMPOSSIBLE);
-                        return true;
-                    }
-
-                    sender.sendMessage(ConfigValues.BAN_SUCCESSFUL(args[0], getMotive(args)));
-                    BanAction.ban(args[0], getMotive(args), getExecutor(sender));
+            if (sender.hasPermission("kick.execute")) {
+                if (ConfigValues.overridePlayers.contains(args[0])) {
+                    sender.sendMessage(ConfigValues.KICK_IMPOSSIBLE);
                     return true;
                 }
-                sender.sendMessage(ConfigValues.ALREADY_BANNED);
+
+                sender.sendMessage(ConfigValues.KICK_SUCCESSFUL(args[0], getMotive(args)));
+                BanAction.kick(args[0], getMotive(args), getExecutor(sender));
                 return true;
             }
             sender.sendMessage(ConfigValues.NO_PERMISSION);

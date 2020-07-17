@@ -15,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import ro.plugin.punishmentsplus.data.DataHandler;
 import ro.plugin.punishmentsplus.data.SQLite;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,7 +36,7 @@ public class BanAction {
 
         DataHandler.addPlayer(player, motive, banExecutor); // Add a player to the ban's list into the data.sqlite.
 
-        if (ConfigValues.isPublicBanMessageEnabled) {
+        if (ConfigValues.IS_PUBLIC_BAN_MESSAGE_ENABLED) {
             Bukkit.getServer().broadcastMessage(ConfigValues.PUBLIC_BAN_MESSAGE(player, motive, banExecutor, "PERMANENT"));
         }
 
@@ -51,18 +52,23 @@ public class BanAction {
     public static void un_ban(String player, String unbanExecutor) {
         DataHandler.removePlayer(player); // Remove a player to the database's bans table.
 
-        if (ConfigValues.isPublicUnbanMessageEnabled) {
+        if (ConfigValues.IS_PUBLIC_UNBAN_MESSAGE_ENABLED)
             Bukkit.getServer().broadcastMessage(ConfigValues.PUBLIC_UNBAN_MESSAGE(player, unbanExecutor));
-        }
     }
 
     /**
      * Method for kick a player from the server. The kick's used for remove a player from the server. When the player
      * is kicked, it can rejoin into the server.
      */
-    public static void kick(String player, String reason) {
+    public static void kick(String player, String motive, String kickExecutor) {
         Player plr = Bukkit.getPlayerExact(player);
 
+        if (ConfigValues.IS_PUBLIC_KICK_MESSAGE_ENABLED)
+            Bukkit.getServer().broadcastMessage(ConfigValues.PUBLIC_KICK_MESSAGE(player, kickExecutor, motive));
+
+        if (plr != null) {
+            plr.kickPlayer(ConfigValues.KICK_MESSAGE(kickExecutor, motive));
+        }
     }
 
     /**

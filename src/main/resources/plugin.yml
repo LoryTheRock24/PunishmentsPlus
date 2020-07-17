@@ -8,3 +8,5 @@ commands:
     description: Ban a player from the server.
   unban:
     description: Unban a player from the server.
+  kick:
+    description: Kick a player from the server.

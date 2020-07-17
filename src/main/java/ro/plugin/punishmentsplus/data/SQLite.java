@@ -63,6 +63,6 @@ public abstract class SQLite {
      * This is a SQL method for remove a player from the bans' data.
      */
     public static String REMOVE_BANNED_PLAYER(String player) {
-        return "DELETE FROM bans WHERE player=" + player +";";
+        return "DELETE FROM bans WHERE player='" + player +"';";
     }
 }
