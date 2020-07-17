@@ -18,7 +18,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import ro.plugin.punishmentsplus.system.BanAction;
 import ro.plugin.punishmentsplus.system.ConfigValues;
 
-@SuppressWarnings("ALL")
 public class PluginListener implements Listener {
 
     @EventHandler

@@ -70,7 +70,6 @@ public class BanAction {
      */
     public static boolean isPermanentlyBanned(String player) {
         List<String> data = new ArrayList<>();
-        int count = 1;
 
         try {
             DataHandler.openConnection();
@@ -82,7 +81,6 @@ public class BanAction {
 
             while (rs.next()) {
                 data.add(rs.getString("player"));
-                count++;
             }
 
             st.close();
