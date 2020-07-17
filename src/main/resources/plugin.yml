@@ -10,3 +10,5 @@ commands:
     description: Unban a player from the server.
   kick:
     description: Kick a player from the server.
+  pphelp:
+    description: View the plugin's help page.
