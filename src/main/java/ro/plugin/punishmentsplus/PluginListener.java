@@ -18,6 +18,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import ro.plugin.punishmentsplus.system.BanAction;
 import ro.plugin.punishmentsplus.system.ConfigValues;
 
+/**
+ * The plugin listener for manage all the plugin's necessary events.
+ */
 public class PluginListener implements Listener {
 
     @EventHandler

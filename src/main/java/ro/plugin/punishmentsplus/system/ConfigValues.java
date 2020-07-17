@@ -16,6 +16,9 @@ import ro.plugin.punishmentsplus.PunishmentsPlus;
 
 import java.util.List;
 
+/**
+ * Class for manage all the config strings references.
+ */
 public abstract class ConfigValues {
 
     private static final FileConfiguration config = PunishmentsPlus.Instance.getConfig();

@@ -59,6 +59,9 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Method for add a player into the bans table.
+     */
     public static void addPlayer(String playerName, String banMotive, String banExecutor) {
         try {
             openConnection();
@@ -75,6 +78,9 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Method for remove a player from the bans table.
+     */
     public static void removePlayer(String playerName) {
         try {
             openConnection();
