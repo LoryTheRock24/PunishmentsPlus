@@ -14,6 +14,7 @@ package ro.plugin.punishmentsplus;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import ro.plugin.punishmentsplus.commands.NormalBanCommand;
+import ro.plugin.punishmentsplus.commands.NormalUnbanCommand;
 import ro.plugin.punishmentsplus.data.LoadDataSystem;
 
 public final class PunishmentsPlus extends JavaPlugin {
@@ -30,6 +31,7 @@ public final class PunishmentsPlus extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PluginListener(), this);
 
         this.getCommand("ban").setExecutor(new NormalBanCommand());
+        this.getCommand("unban").setExecutor(new NormalUnbanCommand());
     }
 
     @Override

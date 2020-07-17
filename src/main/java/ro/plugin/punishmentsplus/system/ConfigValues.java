@@ -14,23 +14,34 @@ package ro.plugin.punishmentsplus.system;
 import org.bukkit.configuration.file.FileConfiguration;
 import ro.plugin.punishmentsplus.PunishmentsPlus;
 
+import java.util.List;
+
 public abstract class ConfigValues {
 
-    private static FileConfiguration config = PunishmentsPlus.Instance.getConfig();
+    private static final FileConfiguration config = PunishmentsPlus.Instance.getConfig();
 
     private static final String enablePublicBanMessage = config.getString("Settings.enablePublicBanMessage");
     private static final String enablePublicUnbanMessage = config.getString("Settings.enablePublicUnbanMessage");
 
-    public static final String noPermissionMessage = PrincipalMessaging.parseMessage(
+    public static final String NO_PERMISSION = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.noPermission"));
-    public static final String syntaxError = PrincipalMessaging.parseMessage(
+    public static final String SYNTAX_ERROR = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.syntaxError"));
-    public static final String alreadyBanned = PrincipalMessaging.parseMessage(
+    public static final String ALREADY_BANNED = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.alreadyBanned"));
-    public static final String banImpossible = PrincipalMessaging.parseMessage(
+    public static final String BAN_IMPOSSIBLE = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.banImpossible"));
+    public static final String NOT_BANNED = PrincipalMessaging.parseMessage(
+            config.getString("Settings.Messages.notBanned"));
 
-    public static String banSuccessful(String player, String motive) {
+    public static final List<String> overridePlayers = config.getStringList("Settings.overridePlayers");
+
+    public static String PLAYER_UNBANNED(String player) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.playerUnbanned")
+                .replace("%BANNED-PLAYER%", player));
+    }
+
+    public static String BAN_SUCCESSFUL(String player, String motive) {
         return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.banSuccessful")
                 .replace("%BANNED-PLAYER%", player).replace("%MOTIVATION%", motive));
     }

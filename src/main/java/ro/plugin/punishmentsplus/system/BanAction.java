@@ -39,9 +39,9 @@ public class BanAction {
             Bukkit.getServer().broadcastMessage(ConfigValues.PUBLIC_BAN_MESSAGE(player, motive, banExecutor, "PERMANENT"));
         }
 
-        if (!plr.isOnline()) return;
-
-        plr.kickPlayer(ConfigValues.JOIN_PERMANENTLY_BANNED_MESSAGE(banExecutor, motive));
+        if (plr != null) {
+            plr.kickPlayer(ConfigValues.JOIN_PERMANENTLY_BANNED_MESSAGE(banExecutor, motive));
+        }
     }
 
     /**
@@ -70,6 +70,7 @@ public class BanAction {
      */
     public static boolean isPermanentlyBanned(String player) {
         List<String> data = new ArrayList<>();
+        int count = 1;
 
         try {
             DataHandler.openConnection();
@@ -79,7 +80,10 @@ public class BanAction {
 
             rs = st.executeQuery(SQLite.SELECT_BAN_PLAYER_LIST);
 
-            for (int i=1; rs.next(); i++) data.add(rs.getString(i));
+            while (rs.next()) {
+                data.add(rs.getString("player"));
+                count++;
+            }
 
             st.close();
 

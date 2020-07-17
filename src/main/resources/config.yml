@@ -9,11 +9,17 @@ Settings:
   # from the server.
   #
   enablePublicBanMessage: true
-    #
-    # This option define if the server can say to all the players a message for when a player will unbanned
-    # from the server.
-    #
-    enablePublicUnbanMessage: true
+  #
+  # This option define if the server can say to all the players a message for when a player will unbanned
+  # from the server.
+  #
+  enablePublicUnbanMessage: true
+  #
+  # The ban override players
+  #
+  overridePlayers:
+    - aPlayer
+    - AnotherPlayer
   #
   # The messages.
   #
@@ -26,7 +32,7 @@ Settings:
     #
     # The public ban message.
     #
-    publicBanMessage: "&f%BANNED-PLAYER%&c was banned from the server by&f %BAN-EXECUTOR%&f for&f %MOTIVATION%.\n&c Duration:&f %DURATION%."
+    publicBanMessage: "&f%BANNED-PLAYER%&c was banned from the server by&f %BAN-EXECUTOR%&f for&f %MOTIVATION%.\n&cDuration:&f %DURATION%."
     #
     # The public unban message.
     #
@@ -51,3 +57,11 @@ Settings:
     # The message for when a player try to ban a player with the ban.override permission
     #
     banImpossible: "&c[PunishmentsPlus]&f You can't ban that player."
+    #
+    # The message for when a player try to unban a player but he isn't banned
+    #
+    notBanned: "&c[PunishmentsPlus]&f That player isn't banned."
+    #
+    # The message for when a player unban a player.
+    #
+    playerUnbanned: "&c[PunishmentsPlus]&f You have unbanned %BANNED-PLAYER%"

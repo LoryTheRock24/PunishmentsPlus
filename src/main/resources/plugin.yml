@@ -6,3 +6,5 @@ description: Very good plugin for applicate a ban / warn / kick to a player.
 commands:
   ban:
     description: Ban a player from the server.
+  unban:
+    description: Unban a player from the server.

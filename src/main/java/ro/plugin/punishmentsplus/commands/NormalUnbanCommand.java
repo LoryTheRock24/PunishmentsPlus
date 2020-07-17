@@ -18,46 +18,28 @@ import org.bukkit.entity.Player;
 import ro.plugin.punishmentsplus.system.BanAction;
 import ro.plugin.punishmentsplus.system.ConfigValues;
 
-@SuppressWarnings("ALL")
-public class NormalBanCommand implements CommandExecutor{
+public class NormalUnbanCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length >= 2) {
-            String motive = "";
-
+        if (args.length == 1) {
             if (sender.hasPermission("ban.execute")) {
-                if (!BanAction.isPermanentlyBanned(args[0]) && !BanAction.isTemporarilyBanned(args[0])) {
-                    if (ConfigValues.overridePlayers.contains(args[0])) {
-                        sender.sendMessage(ConfigValues.BAN_IMPOSSIBLE);
-                        return true;
-                    }
+                if (BanAction.isPermanentlyBanned(args[0]) && BanAction.isTemporarilyBanned(args[0])) {
 
-                    sender.sendMessage(ConfigValues.BAN_SUCCESSFUL(args[0], getMotive(args)));
-                    BanAction.ban(args[0], getMotive(args), getExecutor(sender));
+                    sender.sendMessage(ConfigValues.PLAYER_UNBANNED(args[0]));
+                    BanAction.un_ban(args[0], getExecutor(sender));
                     return true;
                 }
-                sender.sendMessage(ConfigValues.ALREADY_BANNED);
+
+                sender.sendMessage(ConfigValues.NOT_BANNED);
                 return true;
             }
+
             sender.sendMessage(ConfigValues.NO_PERMISSION);
             return true;
         }
+
         sender.sendMessage(ConfigValues.SYNTAX_ERROR);
         return true;
-    }
-
-    public String getMotive(String[] args) {
-        String motive = "";
-
-        for (int a = 0; a < args.length; a++) {
-            if (a == 0) {
-                motive = motive + "";
-                continue;
-            }
-            motive = motive + args[a] + " ";
-        }
-
-        return motive;
     }
 
     public String getExecutor(CommandSender sender) {
