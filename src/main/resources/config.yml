@@ -86,3 +86,7 @@ Settings:
     # The message for when a player ban another player for permanently
     #
     kickSuccessful: "&c[PunishmentsPlus]&f You have kicked %KICKED-PLAYER% for %MOTIVATION%"
+    #
+    # Message for when a player try to kick an offline player.
+    #
+    kickPlayerNotOnline: "&c[PunishmentsPlus]&f You can't kick an offline player."

@@ -32,6 +32,8 @@ public abstract class ConfigValues {
             config.getString("Settings.Messages.notBanned"));
     public static final String KICK_IMPOSSIBLE = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.kickImpossible"));
+    public static final String KICK_PLAYER_NOT_ONLINE = PrincipalMessaging.parseMessage(
+            config.getString("Settings.Messages.kickPlayerNotOnline"));
 
     public static final List<String> overridePlayers = config.getStringList("Settings.overridePlayers");
 
@@ -42,7 +44,7 @@ public abstract class ConfigValues {
     }
 
     public static String KICK_MESSAGE(String kickExecutor, String motive) {
-        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.publicKickMessage")
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.kickMessage")
                 .replace("%KICK-EXECUTOR%", kickExecutor).replace("%MOTIVATION%", motive));
     }
 

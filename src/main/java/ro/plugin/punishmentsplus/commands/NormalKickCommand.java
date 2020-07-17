@@ -11,6 +11,7 @@
 
 package ro.plugin.punishmentsplus.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,13 +25,18 @@ public class NormalKickCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length >= 2) {
             if (sender.hasPermission("kick.execute")) {
-                if (ConfigValues.overridePlayers.contains(args[0])) {
-                    sender.sendMessage(ConfigValues.KICK_IMPOSSIBLE);
+                if (Bukkit.getPlayerExact(args[0]) != null) {
+                    if (ConfigValues.overridePlayers.contains(args[0])) {
+                        sender.sendMessage(ConfigValues.KICK_IMPOSSIBLE);
+                        return true;
+                    }
+
+                    sender.sendMessage(ConfigValues.KICK_SUCCESSFUL(args[0], getMotive(args)));
+                    BanAction.kick(args[0], getMotive(args), getExecutor(sender));
                     return true;
                 }
 
-                sender.sendMessage(ConfigValues.KICK_SUCCESSFUL(args[0], getMotive(args)));
-                BanAction.kick(args[0], getMotive(args), getExecutor(sender));
+                sender.sendMessage(ConfigValues.KICK_PLAYER_NOT_ONLINE);
                 return true;
             }
             sender.sendMessage(ConfigValues.NO_PERMISSION);
