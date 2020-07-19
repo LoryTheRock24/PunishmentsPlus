@@ -1,5 +1,5 @@
 name: PunishmentsPlus
-version: ${project.version}
+version: 1.0.1
 main: ro.plugin.punishmentsplus.PunishmentsPlus
 authors: [LoryTheRock24]
 description: Very good plugin for applicate a ban / warn / kick to a player.
@@ -12,3 +12,7 @@ commands:
     description: Kick a player from the server.
   pphelp:
     description: View the plugin's help page.
+  mute:
+    description: Mute a player from the server's chat.
+  unmute:
+    description: Unmute a muted player from the server's chat.

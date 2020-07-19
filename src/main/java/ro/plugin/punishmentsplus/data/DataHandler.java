@@ -14,6 +14,7 @@ package ro.plugin.punishmentsplus.data;
 import org.bukkit.Bukkit;
 
 import java.sql.*;
+import java.util.Arrays;
 
 /**
  * Class for manage the data.sqlite database.
@@ -55,7 +56,19 @@ public class DataHandler {
             st.close();
             closeConnection();
         } catch (SQLException e) {
-            Bukkit.getLogger().warning("[PunishmentsPlus] Creation of the bandata.sqlite database's data-table failed.");
+            Bukkit.getLogger().warning("[PunishmentsPlus] Creation of the data.sqlite database's ban-table failed.");
+        }
+    }
+
+    public static void createMuteTable() {
+        try {
+            openConnection();
+            Statement st = connection.createStatement();
+            st.execute(SQLite.CREATE_MUTE_TABLE);
+            st.close();
+            closeConnection();
+        } catch (SQLException e) {
+            Bukkit.getLogger().warning("[PunishmentsPlus] Creation of the data.sqlite database's mute-table failed.");
         }
     }
 
@@ -74,7 +87,7 @@ public class DataHandler {
 
             closeConnection();
         } catch (SQLException e) {
-            Bukkit.getLogger().warning("[PunishmentsPlus] Error while adding the player " + playerName + " to the plugin's database.");
+            Bukkit.getLogger().warning("[PunishmentsPlus] Error while adding the player " + playerName + " to the plugin's database's bans table.");
         }
     }
 
@@ -91,6 +104,39 @@ public class DataHandler {
             closeConnection();
         } catch (SQLException e) {
             Bukkit.getLogger().warning("[PunishmentsPlus] Error while removing the player " + playerName + " from the plugin's database.");
+        }
+    }
+
+    /**
+     * Method for add a player to the mutes table.
+     */
+    public static void addMutedPlayer(String playerName) {
+        try {
+            openConnection();
+            PreparedStatement pst = connection.prepareStatement(SQLite.ADD_PLAYER_MUTEDATA);
+
+            pst.setString(1, playerName);
+            pst.executeUpdate();
+
+            closeConnection();
+        } catch (SQLException e) {
+            Bukkit.getLogger().warning("[PunishmentsPlus] Error while adding the player " + playerName + " to the plugin's database's mutes table.");
+        }
+    }
+
+    /**
+     * Method for remove a player to the mutes table.
+     */
+    public static void removeMutedPlayer(String playerName) {
+        try {
+            openConnection();
+            PreparedStatement pst = connection.prepareStatement(SQLite.REMOVE_MUTED_PLAYER(playerName));
+
+            pst.executeUpdate();
+
+            closeConnection();
+        } catch (SQLException e) {
+            Bukkit.getLogger().warning("[PunishmentsPlus] Error while adding the player " + playerName + " to the plugin's database's mutes table.");
         }
     }
 }

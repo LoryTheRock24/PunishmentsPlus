@@ -37,8 +37,18 @@ public abstract class ConfigValues {
             config.getString("Settings.Messages.kickImpossible"));
     public static final String KICK_PLAYER_NOT_ONLINE = PrincipalMessaging.parseMessage(
             config.getString("Settings.Messages.kickPlayerNotOnline"));
+    public static final String MUTED_PLAYER_MESSAGE = PrincipalMessaging.parseMessage(
+            config.getString("Settings.Messages.mutedPlayerMessage"));
+    public static final String MUTE_IMPOSSIBLE = PrincipalMessaging.parseMessage(
+            config.getString("Settings.Messages.muteImpossible"));
+    public static final String ALREADY_MUTED = PrincipalMessaging.parseMessage(
+            config.getString("Settings.Messages.alreadyMuted"));
+    public static final String NOT_MUTED = PrincipalMessaging.parseMessage(
+            config.getString("Settings.Messages.notMuted"));
 
     public static final List<String> overridePlayers = config.getStringList("Settings.overridePlayers");
+    public static final List<String> prohibitedCommandsOnMute = config.getStringList(
+            "Settings.prohibitedCommandsOnMute");
 
     public static String PUBLIC_KICK_MESSAGE(String kickedPlayer, String kickExecutor, String motive) {
         return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.publicKickMessage")
@@ -82,10 +92,45 @@ public abstract class ConfigValues {
                 .replace("%BANNED-PLAYER%", bannedPlayer).replace("%UNBAN-EXECUTOR%", unbanExecutor));
     }
 
+    public static String PRIVATE_MUTE_MESSAGE(String executor, String motive) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.privateMuteMessage")
+                .replace("%MUTE-EXECUTOR%", executor).replace("%MOTIVATION%", motive));
+    }
+
+    public static String PUBLIC_MUTE_MESSAGE(String player, String executor, String motive) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.publicMuteMessage")
+                .replace("%MUTE-EXECUTOR%", executor).replace("%MOTIVATION%", motive)
+                .replace("%MUTED-PLAYER%", player));
+    }
+
+    public static String PRIVATE_UNMUTE_MESSAGE(String executor) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.privateUnmuteMessage")
+                .replace("%MUTE-EXECUTOR%", executor));
+    }
+
+    public static String PUBLIC_UNMUTE_MESSAGE(String player, String executor) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.publicUnmuteMessage")
+                .replace("%MUTE-EXECUTOR%", executor).replace("%MUTED-PLAYER%", player));
+    }
+
+    public static String MUTE_SUCCESSFUL(String player, String motive) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.muteSuccessful")
+                .replace("%MUTED-PLAYER%", player).replace("%MOTIVATION%", motive));
+    }
+
+    public static String UNMUTE_SUCCESSFUL(String player) {
+        return PrincipalMessaging.parseMessage(config.getString("Settings.Messages.unmuteSuccessful")
+                .replace("%MUTED-PLAYER%", player));
+    }
+
     public static boolean IS_PUBLIC_BAN_MESSAGE_ENABLED = Boolean.parseBoolean(
             config.getString("Settings.enablePublicBanMessage"));
     public static boolean IS_PUBLIC_UNBAN_MESSAGE_ENABLED = Boolean.parseBoolean(
             config.getString("Settings.enablePublicUnbanMessage"));
     public static boolean IS_PUBLIC_KICK_MESSAGE_ENABLED = Boolean.parseBoolean(
             config.getString("Settings.enablePublicKickMessage"));
+    public static boolean IS_PUBLIC_MUTE_MESSAGE_ENABLED = Boolean.parseBoolean(
+            config.getString("Settings.enablePublicMuteMessage"));
+    public static boolean IS_PUBLIC_UNMUTE_MESSAGE_ENABLED = Boolean.parseBoolean(
+            config.getString("Settings.enablePublicUnmuteMessage"));
 }

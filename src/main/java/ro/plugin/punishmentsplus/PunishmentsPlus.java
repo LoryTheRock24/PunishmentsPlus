@@ -13,10 +13,7 @@ package ro.plugin.punishmentsplus;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import ro.plugin.punishmentsplus.commands.HelpCommand;
-import ro.plugin.punishmentsplus.commands.NormalBanCommand;
-import ro.plugin.punishmentsplus.commands.NormalKickCommand;
-import ro.plugin.punishmentsplus.commands.NormalUnbanCommand;
+import ro.plugin.punishmentsplus.commands.*;
 import ro.plugin.punishmentsplus.data.LoadDataSystem;
 
 public final class PunishmentsPlus extends JavaPlugin {
@@ -36,6 +33,8 @@ public final class PunishmentsPlus extends JavaPlugin {
         this.getCommand("unban").setExecutor(new NormalUnbanCommand());
         this.getCommand("kick").setExecutor(new NormalKickCommand());
         this.getCommand("pphelp").setExecutor(new HelpCommand());
+        this.getCommand("mute").setExecutor(new NormalMuteCommand());
+        this.getCommand("unmute").setExecutor(new NormalUnmuteCommand());
     }
 
     @Override

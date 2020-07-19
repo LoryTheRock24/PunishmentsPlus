@@ -15,22 +15,28 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import ro.plugin.punishmentsplus.system.BanAction;
 import ro.plugin.punishmentsplus.system.ConfigValues;
+import ro.plugin.punishmentsplus.system.MuteAction;
 
-public class NormalUnbanCommand implements CommandExecutor {
+@SuppressWarnings("ALL")
+public class NormalMuteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length == 1) {
-            if (sender.hasPermission("unban.execute")) {
-                if (BanAction.isPermanentlyBanned(args[0]) || BanAction.isTemporarilyBanned(args[0])) {
+        if (args.length >= 2) {
+            if (sender.hasPermission("mute.execute")) {
+                if (!MuteAction.isMuted(args[0])) {
+                    if (!ConfigValues.overridePlayers.contains(args[0])) {
 
-                    sender.sendMessage(ConfigValues.PLAYER_UNBANNED(args[0]));
-                    BanAction.un_ban(args[0], getExecutor(sender));
+                        MuteAction.mute(args[0], getMotive(args), getExecutor(sender));
+                        sender.sendMessage(ConfigValues.MUTE_SUCCESSFUL(args[0], getMotive(args)));
+                        return true;
+                    }
+
+                    sender.sendMessage(ConfigValues.MUTE_IMPOSSIBLE);
                     return true;
                 }
 
-                sender.sendMessage(ConfigValues.NOT_BANNED);
+                sender.sendMessage(ConfigValues.ALREADY_MUTED);
                 return true;
             }
 
@@ -40,6 +46,20 @@ public class NormalUnbanCommand implements CommandExecutor {
 
         sender.sendMessage(ConfigValues.SYNTAX_ERROR);
         return true;
+    }
+
+    public String getMotive(String[] args) {
+        String motive = "";
+
+        for (int a = 0; a < args.length; a++) {
+            if (a == 0) {
+                motive = motive + "";
+                continue;
+            }
+            motive = motive + args[a] + " ";
+        }
+
+        return motive;
     }
 
     public String getExecutor(CommandSender sender) {

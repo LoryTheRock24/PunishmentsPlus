@@ -25,7 +25,9 @@ public class HelpCommand implements CommandExecutor {
                         "§c/pphelp§f = View this page.\n" +
                         "§c/ban <player> <motive>§f = Permanently ban a player from the server.\n" +
                         "§c/unban <player>§f = Unban a player from the server.\n" +
-                        "§c/kick <player> <motive>§f = Kick a player from the server");
+                        "§c/kick <player> <motive>§f = Kick a player from the server.\n" +
+                        "§c/mute <player> <motive>§f = Mute a player from the server's chat.\n" +
+                        "§c/unmute <player> <motive>§f = Unmute a player from the server's chat.");
                 return true;
             }
 

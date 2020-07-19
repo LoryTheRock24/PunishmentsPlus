@@ -29,6 +29,7 @@ public class CreateDatabase {
             try {
                 BanData.createNewFile();
                 DataHandler.createBanTable();
+                DataHandler.createMuteTable();
 
                 Bukkit.getLogger().info("[PunishmentsPlus] data.sqlite file creation successful!");
             } catch (IOException e) {

@@ -20,11 +20,29 @@ Settings:
   #
   enablePublicKickMessage: true
   #
+  # This option define if the server can say to all the players a message for when a player will muted
+  # from the server.
+  #
+  enablePublicMuteMessage: true
+  #
+  # This option define if the server can say to all the players a message for when a player will unmuted
+  # from the server.
+  #
+  enablePublicUnmuteMessage: true
+  #
   # The ban override players
   #
   overridePlayers:
     - aPlayer
     - AnotherPlayer
+  #
+  # This is the list of the prohibited commands for a muted player.
+  #
+  prohibitedCommandsOnMute:
+    - /msg
+    - /tell
+    - /me
+    - /minecraft:me
   #
   # The messages.
   #
@@ -90,3 +108,43 @@ Settings:
     # Message for when a player try to kick an offline player.
     #
     kickPlayerNotOnline: "&c[PunishmentsPlus]&f You can't kick an offline player."
+    #
+    # Message for when a muted player write a message in chat
+    #
+    mutedPlayerMessage: "&cYou are muted from the chat!"
+    #
+    # This message was send to a player when hi will be muted.
+    #
+    privateMuteMessage: "&c[PunishmentsPlus]&c You've been muted from the server by&f %MUTE-EXECUTOR%&c for&f %MOTIVATION%"
+    #
+    # The public mute message.
+    #
+    publicMuteMessage: "&c[PunishmentsPlus]&f %MUTE-EXECUTOR%&c has muted&f %MUTED-PLAYER%&c for&f %MOTIVATION%"
+    #
+    # This message was send to a player when hi will be unmuted.
+    #
+    privateUnmuteMessage: "&c[PunishmentsPlus]&c You've been unmuted from the server by&f %MUTE-EXECUTOR%"
+    #
+    # The public unmute message.
+    #
+    publicUnmuteMessage: "&a[PunishmentsPlus] %MUTE-EXECUTOR% has unmuted %MUTED-PLAYER%"
+    #
+    # The message for when a player try to mute a player into the overrides players' list
+    #
+    muteImpossible: "&c[PunishmentsPlus]&f You can't mute that player."
+    #
+    # The message for when a player try to ban an already banned player.
+    #
+    alreadyMuted: "&c[PunishmentsPlus]&f That player was already muted."
+    #
+    # The message for when a player mute a player from the server chat.
+    #
+    muteSuccessful: "&c[PunishmentsPlus]&c You've muted&f %MUTED-PLAYER%&c for&f %MOTIVATION%"
+    #
+    # The message for when a player try to unmute a player but he isn't muted
+    #
+    notMuted: "&c[PunishmentsPlus]&f That player isn't muted."
+    #
+    # The message for when a player unmute a muted player.
+    #
+    unmuteSuccessful: "&c[PunishmentsPlus]&f You have unmuted %MUTED-PLAYER%"

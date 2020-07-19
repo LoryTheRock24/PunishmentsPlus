@@ -15,22 +15,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import ro.plugin.punishmentsplus.system.BanAction;
 import ro.plugin.punishmentsplus.system.ConfigValues;
+import ro.plugin.punishmentsplus.system.MuteAction;
 
-public class NormalUnbanCommand implements CommandExecutor {
+public class NormalUnmuteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1) {
-            if (sender.hasPermission("unban.execute")) {
-                if (BanAction.isPermanentlyBanned(args[0]) || BanAction.isTemporarilyBanned(args[0])) {
+            if (sender.hasPermission("unmute.execute")) {
+                if (MuteAction.isMuted(args[0])) {
 
-                    sender.sendMessage(ConfigValues.PLAYER_UNBANNED(args[0]));
-                    BanAction.un_ban(args[0], getExecutor(sender));
+                    MuteAction.un_mute(args[0], getExecutor(sender));
+                    sender.sendMessage(ConfigValues.UNMUTE_SUCCESSFUL(args[0]));
                     return true;
                 }
 
-                sender.sendMessage(ConfigValues.NOT_BANNED);
+                sender.sendMessage(ConfigValues.NOT_MUTED);
                 return true;
             }
 

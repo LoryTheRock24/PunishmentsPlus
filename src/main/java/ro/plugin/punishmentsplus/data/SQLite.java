@@ -27,7 +27,24 @@ public abstract class SQLite {
                                                         ")";
 
     /**
-     * This is a SQL string for add a player to the ban's list.
+     * This is a SQL string for create a table into the database.
+     */
+    public static String CREATE_MUTE_TABLE = "CREATE TABLE IF NOT EXISTS " +
+                                                       "mutes(" +
+                                                   "player varchar" +
+                                                         ")";
+
+    /**
+     * This is a SQL string for add a player to the mutes' list.
+     */
+    public static String ADD_PLAYER_MUTEDATA = "INSERT INTO " +
+                                                 "mutes(" +
+                                                "'player'" +
+                                                    ")" +
+                                               "VALUES (?)";
+
+    /**
+     * This is a SQL string for add a player to the bans' list.
      */
     public static String ADD_PLAYER_BANDATA = "INSERT INTO " +
                                                  "bans(" +
@@ -42,6 +59,12 @@ public abstract class SQLite {
      */
     public static String SELECT_BAN_PLAYER_LIST = "SELECT player " +
                                                   "FROM bans";
+
+    /**
+     * This is a SQL string for select the muted players' list.
+     */
+    public static String SELECT_MUTED_PLAYER_LIST = "SELECT player " +
+                                                    "FROM mutes";
 
     /**
      * This is a SQL method for get the executor of a ban. This method need the
@@ -60,9 +83,16 @@ public abstract class SQLite {
     }
 
     /**
-     * This is a SQL method for remove a player from the bans' data.
+     * This is a SQL method for remove a player from the bans' data table.
      */
     public static String REMOVE_BANNED_PLAYER(String player) {
         return "DELETE FROM bans WHERE player='" + player +"';";
+    }
+
+    /**
+     * This is a SQL method for remove a player from the mutes' data table.
+     */
+    public static String REMOVE_MUTED_PLAYER(String player) {
+        return "DELETE FROM mutes WHERE player='" + player +"';";
     }
 }
